@@ -1,0 +1,211 @@
+//HelloAplication
+package com.example.formparcial1;
+
+import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+
+public class HelloApplication extends Application {
+    @Override
+    public void start(Stage stage) throws IOException {
+
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 720, 400);
+        stage.setTitle("Formulario!");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public static void main(String[] args) {
+        launch();
+    }
+}
+
+
+//HelloController
+package com.example.formparcial1;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+
+
+public class HelloController {
+    @FXML
+    private TextField tFNombreCompleto;
+
+    @FXML
+    private DatePicker dPFechaNacimiento;
+
+    @FXML
+    private TextArea tArea;
+
+    @FXML
+    private ChoiceBox<String> choiceBox;
+
+    @FXML
+    private ComboBox<String> comboBox;
+
+    @FXML
+    private RadioButton rButton1;
+
+    @FXML
+    private RadioButton rButton2;
+
+    @FXML
+    private RadioButton rButton3;
+
+    @FXML
+    private CheckBox checkBox1;
+
+    @FXML
+    private CheckBox checkBox2;
+
+    @FXML
+    private CheckBox checkBox3;
+
+    @FXML
+    private ProgressBar progressBar;
+
+    @FXML
+    private Slider slider;
+
+
+
+
+    public void initialize() {
+        Tooltip tooltip = new Tooltip("Ingrese Nombres y Apellidos"); // Mensaje del tooltip
+        tFNombreCompleto.setTooltip(tooltip);
+
+        choiceBox.getItems().addAll("Java", "C#", "C++", "Python");
+        comboBox.getItems().addAll("DESARROLLO HUMANO Y PROFESIONAL",
+                "METODOLOGÍA DE LA INVESTIGACIÓN",
+                "CONTABILIDAD I",
+                "INTRODUCCIÓN A LOS SISTEMAS DE CÓMPUTO",
+                "LÓGICA DE SISTEMAS",
+                "PRECÁLCULO",
+                "ÁLGEBRA LINEAL",
+                "ALGORITMOS",
+                "CONTABILIDAD II",
+                "MATEMÁTICA DISCRETA",
+                "FÍSICA I",
+                "PROGRAMACIÓN I",
+                "CÁLCULO I",
+                "PROCESO ADMINISTRATIVO",
+                "DERECHO INFORMÁTICO",
+                "MICROECONOMÍA",
+                "PROGRAMACIÓN II",
+                "CÁLCULO II",
+                "ESTADÍSTICA I",
+                "FÍSICA II",
+                "MÉTODOS NUMÉRICOS",
+                "PROGRAMACIÓN III",
+                "EMPRENDEDORES DE NEGOCIOS",
+                "ELECTRÓNICA ANALÓGICA",
+                "ESTADÍSTICA II",
+                "INVESTIGACIÓN DE OPERACIONES",
+                "BASES DE DATOS I",
+                "AUTÓMATAS Y LENGUAJES FORMALES",
+                "SISTEMAS OPERATIVOS I",
+                "ELECTRÓNICA DIGITAL",
+                "BASES DE DATOS II",
+                "ANÁLISIS DE SISTEMAS I",
+                "SISTEMAS OPERATIVOS II",
+                "ARQUITECTURA DE COMPUTADORAS I",
+                "COMPILADORES",
+                "DESARROLLO WEB",
+                "ANÁLISIS DE SISTEMAS II",
+                "REDES DE COMPUTADORAS I",
+                "ÉTICA PROFESIONAL",
+                "ARQUITECTURA DE COMPUTADORAS II",
+                "ADMINISTRACIÓN DE TECNOLOGÍAS DE INFORMACIÓN",
+                "INGENIERÍA DE SOFTWARE",
+                "PROYECTO DE GRADUACIÓN I",
+                "REDES DE COMPUTADORAS II",
+                "INTELIGENCIA ARTIFICIAL",
+                "TELECOMUNICACIONES",
+                "SEMINARIO DE TECNOLOGÍAS DE INFORMACIÓN",
+                "ASEGURAMIENTO DE LA CALIDAD DE SOFTWARE",
+                "PROYECTO DE GRADUACIÓN II",
+                "SEGURIDAD Y AUDITORÍA DE SISTEMAS");
+
+
+        checkBox1.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                checkBox2.setSelected(false);
+                checkBox3.setSelected(false);
+            }
+        });
+
+        checkBox2.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                checkBox1.setSelected(false);
+                checkBox3.setSelected(false);
+            }
+        });
+
+        checkBox3.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                checkBox1.setSelected(false);
+                checkBox2.setSelected(false);
+            }
+        });
+
+        rButton1.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                rButton2.setSelected(false);
+                rButton3.setSelected(false);
+            }
+        });
+
+        rButton2.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                rButton1.setSelected(false);
+                rButton3.setSelected(false);
+            }
+        });
+
+        rButton3.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                rButton1.setSelected(false);
+                rButton2.setSelected(false);
+            }
+        });
+        progressBar.progressProperty().bind(slider.valueProperty().divide(100));
+    }
+    @FXML
+    private void Alerta(){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Información");
+        alert.setHeaderText("Tu información se almacenó correcamente");
+        alert.setContentText(tFNombreCompleto.getText());
+        alert.showAndWait();
+    }
+    @FXML
+    private void limpiarComponentes() {
+        tFNombreCompleto.clear();
+        dPFechaNacimiento.setValue(null);
+        tArea.clear();
+        choiceBox.getSelectionModel().clearSelection();
+        comboBox.getSelectionModel().clearSelection();
+        rButton1.setSelected(false);
+        rButton2.setSelected(false);
+        rButton3.setSelected(false);
+        checkBox1.setSelected(false);
+        checkBox2.setSelected(false);
+        checkBox3.setSelected(false);
+        slider.setValue(slider.getMin());
+        progressBar.setProgress(0.0);
+    }
+
+
+}
